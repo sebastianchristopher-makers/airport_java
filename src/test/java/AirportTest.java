@@ -1,11 +1,14 @@
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
-import static org.mockito.Mockito.*;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.Matchers.contains;
+import org.junit.rules.ExpectedException;
+
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.junit.Assert.*;
+import static org.hamcrest.Matchers.contains;
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class AirportTest {
 
@@ -15,10 +18,10 @@ public class AirportTest {
 
     @Before
     public void setUpAirport(){
-        airport = new Airport();
         plane = mock(Plane.class);
         when(plane.isFlying()).thenReturn(true);
         weather = mock(Weather.class);
+        airport = new Airport(weather);
 
 //        before(:each) { allow(plane).to receive(:land) }
     }
@@ -31,16 +34,19 @@ public class AirportTest {
     @Test
     public void aPlaneCanLand(){
         when(weather.isStormy()).thenReturn(false);
-        airport.instructPlaneToLand(plane, weather);
-        assertThat(airport.planes(), contains(plane));
+        airport.instructPlaneToLand(plane);
+        assertThat(airport.getPlanes(), contains(plane));
     }
-//    @Test
-//    public void hasADefaultCapacity(){
-//        when(weather.isStormy()).thenReturn(false);
-//        for(i = 0; i < Airport::DEFAULT_CAPACITY; i++){
-//            airport.instructPlaneToLand(plane, weather);
-//        }
-//        expect { subject.instruct_plane_to_land(plane, weather) }.to raise_error("Cannot land - airport is full!")
-//    }
-
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
+    @Test
+    public void hasADefaultCapacity() throws Exception {
+        when(weather.isStormy()).thenReturn(false);
+        for(int i = 0; i < Airport.DEFAULT_CAPACITY; i++) {
+            airport.instructPlaneToLand(plane);
+        }
+        thrown.expect(Exception.class);
+        thrown.expectMessage("Cannot land - airport is full!");
+        airport.instructPlaneToLand(plane);
+    }
 }
