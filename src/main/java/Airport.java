@@ -35,6 +35,9 @@ public class Airport {
         if(weather.isStormy()){
             throw new RuntimeException("Cannot land - severe weather warning!");
         }
+        if(!plane.isFlying()){
+            throw new RuntimeException("This plane is not in flight!");
+        }
         plane.land();
         planes.add(plane);
     }
@@ -43,9 +46,18 @@ public class Airport {
         if(weather.isStormy()){
             throw new RuntimeException("Cannot take off - severe weather warning!");
         }
+//        if(!getPlanes().contains(plane)){
+        if(!isInAirport(plane)){
+            throw new RuntimeException("This plane is not in your airport!");
+        }
+        planes.remove(plane);
     }
 
     public ArrayList<Plane> getPlanes() {
         return planes;
+    }
+
+    private Boolean isInAirport(Plane plane){
+        return getPlanes().contains(plane);
     }
 }

@@ -9,8 +9,7 @@ import org.junit.runner.RunWith;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.Matchers.not;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @RunWith(HierarchicalContextRunner.class)
 public class AirportTest {
@@ -29,6 +28,7 @@ public class AirportTest {
     @Test
     public void aPlaneCanLand(){
         when(weather.isStormy()).thenReturn(false);
+        when(plane.isFlying()).thenReturn(true);
         airport.instructPlaneToLand(plane);
         assertThat(airport.getPlanes(), contains(plane));
     }
@@ -92,7 +92,73 @@ public class AirportTest {
             when(weather.isStormy()).thenReturn(false);
         }
         public class whenPlaneIsFlying{
-
+            @Before
+            public void setUp(){}
+            @Test
+            public void instructPlaneToLand(){
+                airport.instructPlaneToLand(plane);
+                assertThat(airport.getPlanes(), contains(plane));
+            }
+            @Rule
+            public ExpectedException thrown = ExpectedException.none();
+            @Test
+            public void preventLandingWhenFull(){
+                Airport fullAirport = new Airport(weather, 0);
+                thrown.expect(Exception.class);
+                thrown.expectMessage("Cannot land - airport is full!");
+                fullAirport.instructPlaneToLand(plane);
+                assertThat(fullAirport.getPlanes(), contains(plane));
+            }
+            @Test
+            public void aFlyingPlaneCannotTakeOff(){
+                thrown.expect(Exception.class);
+                thrown.expectMessage("This plane is not in your airport!");
+                airport.instructPlaneToTakeOff(plane);
+            }
+            @Test
+            public void aPlaneLandsWhenItEntersTheAirport(){
+                airport.instructPlaneToLand(plane);
+                verify(plane, times(1)).land();
+            }
+        }
+        public class whenPlaneIsNotFlying{
+            @Before
+            public void setUp(){
+                airport.instructPlaneToLand(plane);
+            }
+            @Test
+            public void canInstructPlaneToTakeOff(){
+                assertThat(airport.getPlanes(), contains(plane));
+                airport.instructPlaneToTakeOff(plane);
+                assertThat(airport.getPlanes(), not(contains(plane)));
+            }
+            @Rule
+            public ExpectedException thrown = ExpectedException.none();
+            @Test
+            public void aPlaneCannotLandIfAtAnAirport(){
+                when(plane.isFlying()).thenReturn(false);
+                assertThat(airport.getPlanes(), contains(plane));
+                thrown.expect(Exception.class);
+                thrown.expectMessage("This plane is not in flight!");
+                airport.instructPlaneToLand(plane);
+            }
+            public void aPlaneCannotLandIfNotFlying(){
+                when(plane.isFlying()).thenReturn(false);
+                thrown.expect(Exception.class);
+                thrown.expectMessage("This plane is not in flight!");
+                airport.instructPlaneToLand(plane);
+            }
+            public void aPlaneCanOnlyTakeOffFromAirportItIsIn(){
+                Airport airportTwo = new Airport(weather);
+                thrown.expect(Exception.class);
+                thrown.expectMessage("This plane is not in your airport!");
+                airportTwo.instructPlaneToTakeOff(plane);
+                assertThat(airport.getPlanes(), contains(plane));
+            }
+            public void aPlaneTakesOffWhenItLeavesTheAirport(){
+                verify(plane, times(1)).takeOff();
+                airport.instructPlaneToTakeOff(plane);
+            }
         }
     }
 
