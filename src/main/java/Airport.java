@@ -32,8 +32,17 @@ public class Airport {
         if(getPlanes().size() == capacity){
             throw new RuntimeException("Cannot land - airport is full!");
         }
+        if(weather.isStormy()){
+            throw new RuntimeException("Cannot land - severe weather warning!");
+        }
         plane.land();
         planes.add(plane);
+    }
+
+    public void instructPlaneToTakeOff(Plane plane){
+        if(weather.isStormy()){
+            throw new RuntimeException("Cannot take off - severe weather warning!");
+        }
     }
 
     public ArrayList<Plane> getPlanes() {

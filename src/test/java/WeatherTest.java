@@ -1,9 +1,9 @@
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.After;
-import org.junit.Assert.*;
-import static org.hamcrest.CoreMatchers.instanceOf;
 import org.junit.Test;
+
+import static org.hamcrest.CoreMatchers.instanceOf;
 
 public class WeatherTest {
 

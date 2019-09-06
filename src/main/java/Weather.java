@@ -6,9 +6,9 @@ public class Weather {
     static final int MIN_WEATHER = 1;
     static final int MAX_WEATHER = 10;
 
-//    public Weather() {
-//        generateWeather();
-//    }
+    public Weather() {
+        generateWeather();
+    }
 
     public Boolean isStormy(){
         generateWeather();
