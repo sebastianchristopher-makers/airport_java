@@ -75,7 +75,7 @@ public class AirportTest {
             assertThat(airport.getPlanes(), not(contains(plane)));
         }
         @Test
-        public void preventsPlanesTakingOffWhenStormy(){
+        public void preventsPlanesTakingOffWhenStormy() throws AirportException {
             when(weather.isStormy()).thenReturn(false);
             airport.instructPlaneToLand(plane);
             when(weather.isStormy()).thenReturn(true);
@@ -110,7 +110,7 @@ public class AirportTest {
                 assertThat(fullAirport.getPlanes(), contains(plane));
             }
             @Test
-            public void aFlyingPlaneCannotTakeOff(){
+            public void aFlyingPlaneCannotTakeOff() throws AirportException {
                 thrown.expect(Exception.class);
                 thrown.expectMessage("This plane is not in your airport!");
                 airport.instructPlaneToTakeOff(plane);
@@ -127,7 +127,7 @@ public class AirportTest {
                 airport.instructPlaneToLand(plane);
             }
             @Test
-            public void canInstructPlaneToTakeOff(){
+            public void canInstructPlaneToTakeOff() throws AirportException {
                 assertThat(airport.getPlanes(), contains(plane));
                 airport.instructPlaneToTakeOff(plane);
                 assertThat(airport.getPlanes(), not(contains(plane)));
@@ -148,14 +148,14 @@ public class AirportTest {
                 thrown.expectMessage("This plane is not in flight!");
                 airport.instructPlaneToLand(plane);
             }
-            public void aPlaneCanOnlyTakeOffFromAirportItIsIn(){
+            public void aPlaneCanOnlyTakeOffFromAirportItIsIn() throws AirportException {
                 Airport airportTwo = new Airport(weather);
                 thrown.expect(Exception.class);
                 thrown.expectMessage("This plane is not in your airport!");
                 airportTwo.instructPlaneToTakeOff(plane);
                 assertThat(airport.getPlanes(), contains(plane));
             }
-            public void aPlaneTakesOffWhenItLeavesTheAirport(){
+            public void aPlaneTakesOffWhenItLeavesTheAirport() throws AirportException {
                 verify(plane, times(1)).takeOff();
                 airport.instructPlaneToTakeOff(plane);
             }

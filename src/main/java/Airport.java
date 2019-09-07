@@ -42,13 +42,12 @@ public class Airport {
         planes.add(plane);
     }
 
-    public void instructPlaneToTakeOff(Plane plane){
+    public void instructPlaneToTakeOff(Plane plane) throws AirportException {
         if(weather.isStormy()){
             throw new RuntimeException("Cannot take off - severe weather warning!");
         }
-//        if(!getPlanes().contains(plane)){
         if(!isInAirport(plane)){
-            throw new RuntimeException("This plane is not in your airport!");
+            throw new AirportException("This plane is not in your airport!");
         }
         planes.remove(plane);
     }
