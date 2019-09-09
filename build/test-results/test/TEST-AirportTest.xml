@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="AirportTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2019-09-06T20:58:29" hostname="Makerss-MacBook-Pro-2.local" time="0.529">
+<testsuite name="AirportTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2019-09-08T20:35:51" hostname="Makerss-MacBook-Pro-2.local" time="0.515">
   <properties/>
-  <testcase name="aPlaneCanLand" classname="AirportTest" time="0.529"/>
+  <testcase name="aPlaneCanLand" classname="AirportTest" time="0.515"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

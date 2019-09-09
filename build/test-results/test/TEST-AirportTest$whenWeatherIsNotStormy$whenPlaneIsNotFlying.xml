@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="AirportTest$whenWeatherIsNotStormy$whenPlaneIsNotFlying" tests="2" skipped="0" failures="0" errors="0" timestamp="2019-09-06T20:58:30" hostname="Makerss-MacBook-Pro-2.local" time="0.012">
+<testsuite name="AirportTest$whenWeatherIsNotStormy$whenPlaneIsNotFlying" tests="2" skipped="0" failures="0" errors="0" timestamp="2019-09-08T20:35:52" hostname="Makerss-MacBook-Pro-2.local" time="0.008">
   <properties/>
-  <testcase name="aPlaneCannotLandIfAtAnAirport" classname="AirportTest$whenWeatherIsNotStormy$whenPlaneIsNotFlying" time="0.009"/>
-  <testcase name="canInstructPlaneToTakeOff" classname="AirportTest$whenWeatherIsNotStormy$whenPlaneIsNotFlying" time="0.002"/>
+  <testcase name="aPlaneCannotLandIfAtAnAirport" classname="AirportTest$whenWeatherIsNotStormy$whenPlaneIsNotFlying" time="0.005"/>
+  <testcase name="canInstructPlaneToTakeOff" classname="AirportTest$whenWeatherIsNotStormy$whenPlaneIsNotFlying" time="0.003"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

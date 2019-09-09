@@ -4,9 +4,9 @@ public class Airport {
 
     static final int DEFAULT_CAPACITY = 10;
 
-    public Weather weather;
-    public ArrayList<Plane> planes = new ArrayList<Plane>();
-    public int capacity;
+    private Weather weather;
+    private ArrayList<Plane> planes = new ArrayList<>();
+    private int capacity;
 
     public Airport(){
         weather = new Weather();
