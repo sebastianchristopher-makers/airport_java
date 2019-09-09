@@ -2,7 +2,8 @@ import java.util.Random;
 
 public class Weather {
 
-    public int weatherRating;
+    private Random random = new Random();
+    private int weatherRating;
     static final int MIN_WEATHER = 1;
     static final int MAX_WEATHER = 10;
 
@@ -16,7 +17,6 @@ public class Weather {
     }
 
     private void generateWeather(){
-        Random random = new Random();
         weatherRating = random.nextInt((MAX_WEATHER - MIN_WEATHER) + 1) + MIN_WEATHER;
     }
 }

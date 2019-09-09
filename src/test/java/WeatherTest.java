@@ -19,11 +19,11 @@ public class WeatherTest {
         weather = null;
     }
 
-    @Test
-    public void hasWeatherRatingFromOneToTen(){
-        Assert.assertTrue(weather.weatherRating >= 1);
-        Assert.assertTrue(weather.weatherRating <= 10);
-    }
+//    @Test //private method
+//    public void hasWeatherRatingFromOneToTen(){
+//        Assert.assertTrue(weather.weatherRating >= 1);
+//        Assert.assertTrue(weather.weatherRating <= 10);
+//    }
     @Test
     public void canCheckIfStormy(){
         Assert.assertThat(weather.isStormy(), instanceOf(Boolean.class));
